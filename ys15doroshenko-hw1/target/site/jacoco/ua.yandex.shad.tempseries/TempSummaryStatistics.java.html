@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TempSummaryStatistics.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TemperatureSeries</a> &gt; <a href="index.source.html" class="el_package">ua.yandex.shad.tempseries</a> &gt; <span class="el_source">TempSummaryStatistics.java</span></div><h1>TempSummaryStatistics.java</h1><pre class="source lang-java linenums">package ua.yandex.shad.tempseries;
+
+public class TempSummaryStatistics {
+
+<span class="pc" id="L5">    private final double EPSILON = 0.00000001;</span>
+
+    public double avgTemp;
+    public double devTemp;
+    public double minTemp;
+    public double maxTemp;
+
+<span class="nc" id="L12">    public TempSummaryStatistics() {</span>
+<span class="nc" id="L13">        avgTemp = 0.0;</span>
+<span class="nc" id="L14">        devTemp = 0.0;</span>
+<span class="nc" id="L15">        minTemp = 0.0;</span>
+<span class="nc" id="L16">        maxTemp = 0.0;</span>
+<span class="nc" id="L17">    }</span>
+
+<span class="fc" id="L19">    public TempSummaryStatistics(double avg, double dev, double min, double max) {</span>
+<span class="fc" id="L20">        avgTemp = avg;</span>
+<span class="fc" id="L21">        devTemp = dev;</span>
+<span class="fc" id="L22">        minTemp = min;</span>
+<span class="fc" id="L23">        maxTemp = max;</span>
+<span class="fc" id="L24">    }</span>
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc" id="L28">        TempSummaryStatistics value = (TempSummaryStatistics) obj;</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">        return (Math.abs(this.avgTemp - value.avgTemp) &lt; EPSILON</span>
+<span class="pc bpc" id="L30" title="1 of 2 branches missed.">                &amp;&amp; Math.abs(this.devTemp - value.devTemp) &lt; EPSILON</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">                &amp;&amp; Math.abs(this.minTemp - value.minTemp) &lt; EPSILON</span>
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">                &amp;&amp; Math.abs(this.maxTemp - value.maxTemp) &lt; EPSILON);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

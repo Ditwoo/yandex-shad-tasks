@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TemperatureSeriesAnalysis.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TemperatureSeries</a> &gt; <a href="index.source.html" class="el_package">ua.yandex.shad.tempseries</a> &gt; <span class="el_source">TemperatureSeriesAnalysis.java</span></div><h1>TemperatureSeriesAnalysis.java</h1><pre class="source lang-java linenums">package ua.yandex.shad.tempseries;
+
+import java.util.InputMismatchException;
+
+public class TemperatureSeriesAnalysis {
+
+<span class="pc" id="L7">    private final double MINIMAL_TEMPERATURE = -273.0;</span>
+
+    private double[] Temperatures;
+
+<span class="nc" id="L11">    public TemperatureSeriesAnalysis() {</span>
+<span class="nc" id="L12">        Temperatures = new double[0];</span>
+<span class="nc" id="L13">    }</span>
+
+<span class="fc" id="L15">    public TemperatureSeriesAnalysis(double... temperatureSeries) {</span>
+<span class="fc" id="L16">        Temperatures = temperatureSeries;</span>
+<span class="fc" id="L17">    }</span>
+
+    private boolean isLengthZero() {
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        return (Temperatures.length == 0) ? true : false;</span>
+    }
+
+    public double average() {
+<span class="fc bfc" id="L24" title="All 2 branches covered.">        if (isLengthZero()) {</span>
+<span class="fc" id="L25">            throw new IllegalArgumentException();</span>
+        }
+
+<span class="fc" id="L28">        double ans = 0;</span>
+
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        for (double element : Temperatures) {</span>
+<span class="fc" id="L31">            ans += element;</span>
+        }
+
+<span class="fc" id="L34">        return ans / Temperatures.length;</span>
+    }
+
+    public double deviation() {
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (isLengthZero()) {</span>
+<span class="fc" id="L39">            throw new IllegalArgumentException();</span>
+        }
+
+<span class="fc" id="L42">        double middle = this.average();</span>
+<span class="fc" id="L43">        double ans = 0;</span>
+
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for (double element : Temperatures) {</span>
+<span class="fc" id="L46">            ans += (element - middle) * (element - middle);</span>
+        }
+
+<span class="fc" id="L49">        ans = ans / Temperatures.length;</span>
+<span class="fc" id="L50">        ans = Math.sqrt(ans);</span>
+
+<span class="fc" id="L52">        return ans;</span>
+
+    }
+
+    public double min() {
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if (isLengthZero()) {</span>
+<span class="fc" id="L58">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L60">        double MinimalTemperature = Temperatures[0];</span>
+
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (double element : Temperatures) {</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">            MinimalTemperature = (element &lt; MinimalTemperature) ? element : MinimalTemperature;</span>
+        }
+
+<span class="fc" id="L66">        return MinimalTemperature;</span>
+    }
+
+    public double max() {
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (isLengthZero()) {</span>
+<span class="fc" id="L71">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L73">        double MaximumTemperature = Temperatures[0];</span>
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (double element : Temperatures) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            MaximumTemperature = (element &gt; MaximumTemperature) ? element : MaximumTemperature;</span>
+        }
+
+<span class="fc" id="L79">        return MaximumTemperature;</span>
+    }
+
+    public double findTempClosestToZero() {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (isLengthZero()) {</span>
+<span class="fc" id="L84">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L86">        double closestTemperature = Temperatures[0];</span>
+
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        for (double element : Temperatures) {</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            if (Math.abs(element) &lt; Math.abs(closestTemperature)) {</span>
+<span class="fc" id="L90">                closestTemperature = element;</span>
+            }
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (element == Math.abs(closestTemperature)) {</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">                closestTemperature = (element &gt; 0) ? closestTemperature : element;</span>
+            }
+        }
+
+<span class="fc" id="L97">        return closestTemperature;</span>
+    }
+
+    public double findTempClosestToValue(double tempValue) {
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (Temperatures.length == 0) {</span>
+<span class="fc" id="L102">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L104">        double closestTemperature = Temperatures[0];</span>
+
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for (double element : Temperatures) {</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if (Math.abs(tempValue - element) &lt; Math.abs(tempValue - closestTemperature)) {</span>
+<span class="fc" id="L108">                closestTemperature = element;</span>
+            }
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (element == Math.abs(closestTemperature)) {</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">                closestTemperature = (element &gt; tempValue) ? closestTemperature : element;</span>
+            }
+        }
+
+<span class="fc" id="L115">        return closestTemperature;</span>
+    }
+
+    public double[] findTempsLessThen(double tempValue) {
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        if (isLengthZero()) {</span>
+<span class="fc" id="L120">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L122">        int countOfLess = 0;</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        for (double element : Temperatures)</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">            if (element &lt; tempValue) {</span>
+<span class="fc" id="L125">                countOfLess++;</span>
+            }
+
+<span class="fc" id="L128">        double[] ans = new double[countOfLess];</span>
+<span class="fc" id="L129">        int iInLess = 0;</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        for (int i = 0; i &lt; Temperatures.length; i++)</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">            if (Temperatures[i] &lt; tempValue) {</span>
+<span class="fc" id="L132">                ans[iInLess] = Temperatures[i];</span>
+<span class="fc" id="L133">                iInLess++;</span>
+            }
+
+<span class="fc" id="L136">        return ans;</span>
+    }
+
+    public double[] findTempsGreaterThen(double tempValue) {
+<span class="fc bfc" id="L140" title="All 2 branches covered.">        if (isLengthZero()) {</span>
+<span class="fc" id="L141">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L143">        int countOfGreater = 0;</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        for (double element : Temperatures)</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">            if (element &gt;= tempValue) {</span>
+<span class="fc" id="L146">                countOfGreater++;</span>
+            }
+
+<span class="fc" id="L149">        double[] ans = new double[countOfGreater];</span>
+<span class="fc" id="L150">        int iInGreater = 0;</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">        for (int i = 0; i &lt; Temperatures.length; i++)</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">            if (Temperatures[i] &gt;= tempValue) {</span>
+<span class="fc" id="L153">                ans[iInGreater] = Temperatures[i];</span>
+<span class="fc" id="L154">                iInGreater++;</span>
+            }
+
+<span class="fc" id="L157">        return ans;</span>
+    }
+
+    public TempSummaryStatistics summaryStatistics() {
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        if (isLengthZero()) {</span>
+<span class="fc" id="L162">            throw new IllegalArgumentException();</span>
+        }
+<span class="fc" id="L164">        TempSummaryStatistics ans = new TempSummaryStatistics(this.average(), this.deviation(), this.min(), this.max());</span>
+
+<span class="fc" id="L166">        return ans;</span>
+    }
+
+    public int addTemps(double... temps) {
+<span class="fc" id="L170">        int CountOfTemperatures = Temperatures.length;</span>
+<span class="fc" id="L171">        int RealCountOfTemperatures = Temperatures.length + temps.length;</span>
+
+<span class="fc bfc" id="L173" title="All 2 branches covered.">        while (CountOfTemperatures &lt; RealCountOfTemperatures) {</span>
+<span class="fc" id="L174">            CountOfTemperatures *= 2;</span>
+        }
+
+<span class="fc bfc" id="L177" title="All 2 branches covered.">        for (double value : temps)</span>
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">            if (value &lt; MINIMAL_TEMPERATURE) {</span>
+<span class="nc" id="L179">                throw new InputMismatchException();</span>
+            }
+
+
+<span class="fc" id="L183">        double[] newTemperatures = new double[CountOfTemperatures];</span>
+
+<span class="fc bfc" id="L185" title="All 2 branches covered.">        for (int i = 0; i &lt; Temperatures.length; i++) {</span>
+<span class="fc" id="L186">            newTemperatures[i] = Temperatures[i];</span>
+        }
+
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        for (int i = 0; i &lt; temps.length; i++) {</span>
+<span class="fc" id="L190">            newTemperatures[i + Temperatures.length] = temps[i];</span>
+        }
+<span class="fc" id="L192">        Temperatures = newTemperatures;</span>
+
+<span class="fc" id="L194">        return RealCountOfTemperatures;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

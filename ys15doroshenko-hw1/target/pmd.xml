@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd version="5.3.2" timestamp="2015-10-01T22:23:13.874">
+<file name="/Users/Dmitry/Documents/Code/Java/My-App/src/main/java/ua/yandex/shad/tempseries/TempSummaryStatistics.java">
+<violation beginline="27" endline="27" begincolumn="20" endcolumn="37" rule="OverrideBothEqualsAndHashcode" ruleset="Basic" package="ua.yandex.shad.tempseries" class="TempSummaryStatistics" method="equals" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/basic.html#OverrideBothEqualsAndHashcode" priority="3">
+Ensure you override both equals() and hashCode()
+</violation>
+<violation beginline="29" endline="32" begincolumn="17" endcolumn="67" rule="UselessParentheses" ruleset="Unnecessary" package="ua.yandex.shad.tempseries" class="TempSummaryStatistics" method="equals" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+<file name="/Users/Dmitry/Documents/Code/Java/My-App/src/main/java/ua/yandex/shad/tempseries/TemperatureSeriesAnalysis.java">
+<violation beginline="63" endline="63" begincolumn="35" endcolumn="62" rule="UselessParentheses" ruleset="Unnecessary" package="ua.yandex.shad.tempseries" class="TemperatureSeriesAnalysis" method="min" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="76" endline="76" begincolumn="35" endcolumn="62" rule="UselessParentheses" ruleset="Unnecessary" package="ua.yandex.shad.tempseries" class="TemperatureSeriesAnalysis" method="max" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="93" endline="93" begincolumn="39" endcolumn="49" rule="UselessParentheses" ruleset="Unnecessary" package="ua.yandex.shad.tempseries" class="TemperatureSeriesAnalysis" method="findTempClosestToZero" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+<violation beginline="111" endline="111" begincolumn="39" endcolumn="57" rule="UselessParentheses" ruleset="Unnecessary" package="ua.yandex.shad.tempseries" class="TemperatureSeriesAnalysis" method="findTempClosestToValue" externalInfoUrl="http://pmd.sourceforge.net/pmd-5.3.2/pmd-java/rules/java/unnecessary.html#UselessParentheses" priority="4">
+Useless parentheses.
+</violation>
+</file>
+</pmd>
